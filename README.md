@@ -318,4 +318,52 @@ func main() {
 ```
 
 ### Slices
+
+#### Slices are used to take the part of the array and store it in different variable 
+#### SLices have 3 properties: 1) Pointers 2) Length 3) Capacity
+#### Syntax: new_variable := old_variable[lower_limit:Upper_limit]
+#### Here upper limit is exclusive whereas lowerlimit is inclusive.
+
+```go
+func main() {
+	primes := [6]int{2, 3, 5, 7, 11, 13}
+
+	var s []int = primes[1:4]
+	fmt.Println(s) // 3 5 7
+}
+```
+#### Slices are based more on capacity. For below example, if you ask for the slice more than the length it will take the value from original array according to his capacity
+
+```go
+func main() {
+	s := []int{2, 3, 5, 7, 11, 13}
+	printSlice(s) // Output: len=6 cap=6 [2 3 5 7 11 13] 
+
+	// Slice the slice to give it zero length.
+	s = s[:0]
+	printSlice(s) // Output: len=0 cap=6 []
+
+	// Extend its length.
+	s = s[:4]
+	printSlice(s) // Output: len=4 cap=6 [2 3 5 7]
+
+	// Drop its first two values.
+	s = s[2:]
+	printSlice(s) // Output: len2= cap=4 [5 7]
+	
+	s = s[1:4]
+	printSlice(s) // Output: len=4 cap=3 [5 7 11]
+	
+	s = s[1:5]
+	printSlice(s) // Output: error as it asked for 4 numbers but capacity is 3
+}
+
+func printSlice(s []int) {
+	fmt.Printf("len=%d cap=%d %v\n", len(s), cap(s), s)
+}
+```
+
+### Creating a slice with make function
+#### make function helps to create the array wthout any error
+#### Syntax: make([] datatype)
 	
